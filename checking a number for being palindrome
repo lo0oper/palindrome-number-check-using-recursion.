@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std ;
+/*  Eg-> 1232'1'   numbers have been marked as prime to avoid confusion.
+  first  num keeps dec till num==1 then it is compared to 1' if true 
+  backtracking happens.
+  then we decrese the temp to temp = 1232'
+  now we compare the 2' with the 2 since num is 12 currently  (remember it was called for n/10 from this situation when it was 12 . )
+  similarly we make temp = 123 and compare 3 with 3 and soo on.
+    
+  
+*/
+
+
+
+
+bool issingledigit(int n ,int *temp){
+    
+    if(n>=0 && n<10)
+        return true;
+    else 
+        return false;
+}
+
+bool palin(int n , int *temp){
+    
+    if(issingledigit(n,temp)){
+        if(n == (*temp)%10){
+            return true;
+        }
+        else return false;
+    }
+    
+    if(palin(n/10,temp)){   // once the recrusion reaches num being a single digit we start back tracking 
+                            // in backtracking we deacrease the temp by dividin it with 10.
+       
+    
+        *temp= (*temp) /10;
+    
+        if(n%10 == (*temp)%10){
+            return true;
+        
+        }
+    }
+    else return false;
+    
+    
+    
+}
+
+int main() {
+	//code
+	int t ;
+	cin>>t;
+	while(t--){
+	int n;
+	cin>>n;
+	
+	int *temp = new int (n) ;
+	if(palin(n,temp)){
+	    cout<<"Yes\n";
+	}
+	else 
+	cout<<"No\n";
+	}	
+}
